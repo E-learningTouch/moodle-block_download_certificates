@@ -1,5 +1,5 @@
-# report_certificates
-Moodle certificate report block
+# download_certificates
+Moodle download certificate block
 
 /**
  * This file is part of Moodle - http://moodle.org/
@@ -17,14 +17,14 @@ Moodle certificate report block
  * You should have received a copy of the GNU General Public License
  * along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
  * 
- * Report certificates block
+ * Download certificates block
  * --------------------------
  * Displays all issued certificates for users with unique codes. 
  * The certificates will also be issued for courses that have been archived since issuing of the certificates 
  *
  * @author  Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com> | 2015
  * @package    blocks
- * @subpackage block_report_certificates
+ * @subpackage block_download_certificates
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 /*
