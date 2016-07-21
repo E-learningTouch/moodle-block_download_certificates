@@ -113,14 +113,13 @@ $PAGE->set_url($url);
                 $link = html_writer::link(new moodle_url('/course/view.php', array('id' => $courseid)),
                 $coursename, array('fullname' => $coursename));
 
-                // Direct certificate download link.
-                $filelink = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'.$contextid.'/mod_certificate/issue/'
-                .$certificateid.'/'.$filename);
-
-                $outputlink = '<a href="'.$filelink.'" >'
-                .'<img src="../download_certificates/pix/download.png" alt="Please download"'
-                .'width="40px" height="40px">'
-                .'</a>';
+                 // Direct certificate download link.
+                $filelink = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'
+                            .$contextid.'/mod_certificate/issue/'
+                            .$certificateid.'/'.$filename);
+                $imglink = html_writer::empty_tag('img', array('src' => new moodle_url(
+                '/blocks/download_certificates/pix/download.png'), 'alt' => "Please download", 'height' => 40, 'width' => 40));
+                $outputlink = '<a href="'.$filelink.'" >' . $imglink . '</a>';
 
                 $table->data[] = array ($link,  $grade, $code, userdate($date, $dateformat), $outputlink);
 

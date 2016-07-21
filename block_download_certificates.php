@@ -143,12 +143,9 @@ class block_download_certificates extends block_base {
                 $filelink = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'
                             .$contextid.'/mod_certificate/issue/'
                             .$certificateid.'/'.$filename);
-
-                 $outputlink = '<a href="'.$filelink.'" >'
-                      .'<img src="../blocks/download_certificates/pix/download.png" alt="Please download"'
-                      .'width="40px" height="40px">'
-                      .'</a>';
-
+                $imglink = html_writer::empty_tag('img', array('src' => new moodle_url(
+                '/blocks/download_certificates/pix/download.png'), 'alt' => "Please download", 'height' => 40, 'width' => 40));
+                $outputlink = '<a href="'.$filelink.'" >' . $imglink . '</a>';
                 $table->data[] = array ($link, $outputlink);
 
             }
