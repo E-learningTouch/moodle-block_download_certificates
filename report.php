@@ -109,9 +109,14 @@ $PAGE->set_url($url);
                 $grade = certificate_get_grade($certdata, $certrecord, $userid, $valueonly = true);
                 $date = $certrecord->timecreated = $certdata->citimecreated;
 
-                // Direct course link.
-                $link = html_writer::link(new moodle_url('/course/view.php', array('id' => $courseid)),
-                $coursename, array('fullname' => $coursename));
+                // Linkable Direct course. Use $courselink for clickable course link.
+                $courselink = html_writer::link(new moodle_url('/course/view.php', array('id' => $courseid)),
+                "<strong>" . $coursename . "</strong>", array('fullname' => $coursename))  . "<br>[<em>" .
+                " Issued on: " . userdate($date, $dateformat) . " | Code: " . $code . " </em>]";
+				
+				// Non - Linkable course title only. The course link isn't linkable.
+                $link = "<strong>" . $coursename . "</strong>" . "<br>[<em>" .
+                " Issued on: " . userdate($date, $dateformat) . " | Code: " . $code . " </em>]";
 
                  // Direct certificate download link.
                 $filelink = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'
