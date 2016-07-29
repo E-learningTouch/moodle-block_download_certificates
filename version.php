@@ -35,7 +35,7 @@ $plugin->requires = 2014111000;       // Requires this Moodle version 2.8.
 $plugin->cron = 0;                    // Period for cron to check this module (secs).
 $plugin->component = 'block_download_certificates'; // To check on upgrade, that module sits in correct place.
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v6-0716';
+$plugin->release = 'v7-0716';
 
 $plugin->dependencies = array(
     'mod_certificate' => ANY_VERSION
