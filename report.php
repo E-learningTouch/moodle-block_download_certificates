@@ -56,32 +56,32 @@ $PAGE->set_url($url);
                              get_string('download_certificates_tblheader_download', 'block_download_certificates'));
         $table->align = array ("left", "center", "center", "center", "center");
 
-        $sql = "SELECT DISTINCT ci.id AS certificateid, ci.userid, ci.code AS code,
-                                ci.timecreated AS citimecreated,
-                                crt.name AS certificatename, crt.*,
-                                cm.id AS coursemoduleid, cm.course, cm.module,
-                                c.id AS id, c.fullname AS fullname, c.*,
-				                ctx.id AS contextid, ctx.instanceid AS instanceid,
-				                f.itemid AS itemid, f.filename AS filename
-                           FROM {certificate_issues} ci
-                     INNER JOIN {certificate} crt
-                             ON crt.id = ci.certificateid
-                     INNER JOIN {course_modules} cm
-                             ON cm.course = crt.course
-                     INNER JOIN {course} c
-                             ON c.id = cm.course
-                     INNER JOIN {context} ctx
-                             ON ctx.instanceid = cm.id
-                     INNER JOIN {files} f
-                             ON f.contextid = ctx.id
-                          WHERE ctx.contextlevel = 70 AND
-                                f.mimetype = 'application/pdf' AND
-                                ci.userid = f.userid AND
-                                ci.userid = :userid
-                       GROUP BY ci.code
-                       ORDER BY ci.timecreated ASC";
-        // CERTIFICATE MODULE (cm.module = 23), CONTEXT_MODULE (ctx.contextlevel = 70).
+        $sql = "SELECT f.id AS fid, f.userid AS fuserid, f.contextid AS fcontextid, f.filename AS ffilename,
+                       ctx.id AS ctxid, ctx.contextlevel AS ctxcontextlevel, ctx.instanceid AS ctxinstanceid,
+                       cm.id AS cmid, cm.course AS cmcourse, cm.module AS cmmodule, cm.instance AS cminstance,
+                       crt.id AS crtid, crt.course AS crtcourse, crt.name AS crtname, ci.id AS ciid,
+					   ci.userid AS ciuserid, ci.certificateid AS cicertificateid, ci.code AS cicode,
+					   ci.timecreated AS citimecreated, c.id AS cid, c.fullname AS cfullname,
+					   c.shortname AS cshortname
+                  FROM {files} f
+            INNER JOIN {context} ctx
+                    ON ctx.id = f.contextid
+            INNER JOIN {course_modules} cm
+                    ON cm.id = ctx.instanceid
+            INNER JOIN {certificate} crt
+                    ON crt.id = cm.instance
+             LEFT JOIN {certificate_issues} ci
+                    ON ci.certificateid = crt.id
+            INNER JOIN {course} c
+                    ON c.id = crt.course
+
+				 WHERE f.userid = ci.userid AND
+				       f.userid = :userid AND
+				    f.component = 'mod_certificate' AND
+                     f.mimetype = 'application/pdf'
+		      ORDER BY ci.timecreated DESC";
         // PDF FILES ONLY (f.mimetype = 'application/pdf').
+
         $certificates = $DB->get_records_sql($sql, array('userid' => $USER->id));
 
         if (!$certificates) {
@@ -89,7 +89,12 @@ $PAGE->set_url($url);
         } else {
 
             foreach ($certificates as $certdata) {
+
                 $certdata->printdate = 1; // Modify printdate so that date is always printed.
+                $certdata->printgrade = 1; // Modify printgrade so that grade is always printed.
+                $certdata->gradefmt = 1;
+                // Modify gradefmt so that correct suffix is printed. 1=percentage, 2=points and 3=letter.
+
                 $certrecord = new stdClass();
                 $certrecord->timecreated = $certdata->citimecreated;
 
@@ -97,13 +102,14 @@ $PAGE->set_url($url);
                 $dateformat = get_string('strftimedate', 'langconfig');
 
                 // Required variables for output.
-                $userid = $certrecord->userid = $certdata->userid;
-                $certificateid = $certrecord->certificateid = $certdata->certificateid;
-                $contextid = $certrecord->contextid = $certdata->contextid;
-                $courseid = $certrecord->id = $certdata->id;
-                $coursename = $certrecord->fullname = $certdata->fullname;
-                $filename = $certrecord->filename = $certdata->filename;
-                $code = $certrecord->code = $certdata->code;
+                $userid = $certrecord->userid = $certdata->fuserid;
+                $certificateissueid = $certrecord->certificateissueid = $certdata->ciid;
+                $contextid = $certrecord->contextid = $certdata->ctxid;
+                $courseid = $certrecord->id = $certdata->cid;
+                $coursename = $certrecord->fullname = $certdata->cfullname;
+                $filename = $certrecord->filename = $certdata->ffilename;
+                $certificatename = $certrecord->name = $certdata->crtname;
+                $code = $certrecord->code = $certdata->cicode;
 
                 // Retrieving grade and date for each certificate.
                 $grade = certificate_get_grade($certdata, $certrecord, $userid, $valueonly = true);
@@ -111,17 +117,16 @@ $PAGE->set_url($url);
 
                 // Linkable Direct course. Use $courselink for clickable course link.
                 $courselink = html_writer::link(new moodle_url('/course/view.php', array('id' => $courseid)),
-                "<strong>" . $coursename . "</strong>", array('fullname' => $coursename))  . "<br>[<em>" .
-                " Issued on: " . userdate($date, $dateformat) . " | Code: " . $code . " </em>]";
-				
-				// Non - Linkable course title only. The course link isn't linkable.
-                $link = "<strong>" . $coursename . "</strong>" . "<br>[<em>" .
-                " Issued on: " . userdate($date, $dateformat) . " | Code: " . $code . " </em>]";
+                "<strong>" . $coursename . "</strong>", array('fullname' => $coursename))  . "<br><em>" .
+                "[Certificate Name: " . $certificatename . "]</em>";
+
+                // Non - Linkable course title only. The course link isn't linkable.
+                $link = "<strong>" . $coursename . "</strong>" . "<br><em>" .
+                "[Certificate Name: " . $certificatename . "]</em>";
 
                  // Direct certificate download link.
                 $filelink = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'
-                            .$contextid.'/mod_certificate/issue/'
-                            .$certificateid.'/'.$filename);
+                . $contextid . '/mod_certificate/issue/' . $certificateissueid . '/' . $filename);
                 $imglink = html_writer::empty_tag('img', array('src' => new moodle_url(
                 '/blocks/download_certificates/pix/download.png'), 'alt' => "Please download", 'height' => 40, 'width' => 40));
                 $outputlink = '<a href="'.$filelink.'" >' . $imglink . '</a>';
