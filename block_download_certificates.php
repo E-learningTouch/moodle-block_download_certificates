@@ -145,9 +145,8 @@ class block_download_certificates extends block_base {
                 " [Issued on: " . userdate($date, $dateformat) . " | Code: " . $code . "]</em>";
 
                 // Non - Linkable course title only. The course link isn't linkable.
-                $link = "<strong>" . $coursename . "</strong>" . "<br><em>" .
-                " Certificate Name: " . $certificatename . "<br>" .
-                " [Issued on: " . userdate($date, $dateformat) . " | Code: " . $code . "]</em>";
+                $link = "<strong>" . $coursename . "</strong>" . "<br>" .
+                "<em>[" . $certificatename . " | " . userdate($date, $dateformat) . " | " . $code . "]</em>";
 
                 // Direct certificate download link.
                 $filelink = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'

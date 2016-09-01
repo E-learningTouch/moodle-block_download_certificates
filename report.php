@@ -121,8 +121,8 @@ $PAGE->set_url($url);
                 "[Certificate Name: " . $certificatename . "]</em>";
 
                 // Non - Linkable course title only. The course link isn't linkable.
-                $link = "<strong>" . $coursename . "</strong>" . "<br><em>" .
-                "[Certificate Name: " . $certificatename . "]</em>";
+                $link = "<strong>" . $coursename . "</strong>" . "<br>" .
+                "<em>[" . $certificatename . "]</em>";
 
                  // Direct certificate download link.
                 $filelink = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'
