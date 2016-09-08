@@ -56,6 +56,28 @@ class block_download_certificates extends block_base {
 
     /**
      *
+     * Restricting Applicable formats.
+     *
+     * Restricting where the blocks can appear on the site (Frontpage and My Learning page only).
+     */
+    public function applicable_formats() {
+        return array('all' => true,
+                     'course-view' => false,
+                     'mod' => false);
+    }
+
+    /**
+     *
+     * Multiple instances of the block.
+     *
+     * Allowing multiple instance of the block to appear throughtout the site pages.
+     */
+    public function instance_allow_multiple() {
+          return true;
+    }
+
+    /**
+     *
      * Retrieving relevant required data.
      *
      * Retrieving data and populating them for displaying on the block.
