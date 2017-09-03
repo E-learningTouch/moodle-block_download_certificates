@@ -137,5 +137,9 @@ $PAGE->set_url($url);
             echo $OUTPUT->heading(get_string('download_certificates_heading', 'block_download_certificates'));
             echo '<br />';
             echo html_writer::table($table);
+
+            //the below two lines were added for the download all certificates functionality
+            $allDownloadsLink = $CFG->wwwroot."/blocks/download_certificates/download_all_my_certificates.php";
+            echo "<a href='".$allDownloadsLink."'><button>Download all my certificates</button></a>";
         }
         echo $OUTPUT->footer();
