@@ -21,9 +21,10 @@
  * --------------------------
  * Displays all issued certificates for users with unique codes.
  * The certificates will also be issued for courses that have been archived since issuing of the certificates.
+ * All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj).
  *
- * @copyright  2015 onwards Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com>
- * @author     Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com> | 2015
+ * @copyright  2015 onwards Manieer Chhettri | <manieer@gmail.com>
+ * @author     Manieer Chhettri | <manieer@gmail.com> | 2015
  * @package    block_download_certificates
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -37,7 +38,8 @@ $string['download_certificates_tblheader_issuedate'] = 'Date Issued';
 $string['download_certificates_tblheader_download'] = 'Download';
 $string['download_certificates_yourcertificate'] = 'Your certificate - please download';
 $string['download_certificates_footermessage'] = 'All My Certificates';
-$string['download_certificates_noreports'] = 'You do not have any certificates issued to you.';
+$string['download_certificates_nocertsissued'] = 'You do not have any certificates issued to you.';
+$string['download_certificates_nofilefound'] = 'No files found.';
 $string['download_certificates_heading'] = 'All Previously Issued Certificates';
 $string['download_certificates_modulenameplural'] = 'Certificates';
 $string['download_certificates:addinstance'] = 'Add a new report certificates block';
