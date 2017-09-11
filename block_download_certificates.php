@@ -21,14 +21,16 @@
  * --------------------------
  * Displays all issued certificates for users with unique codes.
  * The certificates will also be issued for courses that have been archived since issuing of the certificates.
+ * All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj).
  *
- * @copyright  2015 onwards Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com>
- * @author     Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com> | 2015
+ * @copyright  2015 onwards Manieer Chhettri | <manieer@gmail.com>
+ * @author     Manieer Chhettri | <manieer@gmail.com> | 2015
  * @package    block_download_certificates
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
+require_login();
 
 require_once($CFG->dirroot.'/mod/certificate/locallib.php');
 
@@ -130,6 +132,7 @@ class block_download_certificates extends block_base {
         $certificates = $DB->get_records_sql($sql.$limit, array('userid' => $USER->id));
 
         if (empty($certificates)) {
+            // No Certificate Issued - Print error message.
             $this->content->text = get_string('download_certificates_noreports', 'block_download_certificates');
             return $this->content;
         } else {
@@ -162,13 +165,13 @@ class block_download_certificates extends block_base {
 
                 // Linkable Direct course. Use $courselink for clickable course link.
                 $courselink = html_writer::link(new moodle_url('/course/view.php', array('id' => $courseid)),
-                "<strong>" . $coursename . "</strong>", array('fullname' => $coursename))  . "<br><em>" .
-                " Certificate Name: " . $certificatename . "<br>" .
-                " [Issued on: " . userdate($date, $dateformat) . " | Code: " . $code . "]</em>";
+                "<strong>" . $coursename . "</strong>", array('fullname' => $coursename))  . "<br>" .
+                " Certificate: " . $certificatename . "<br>" .
+                " [Issued on: " . userdate($date, $dateformat) . " | Code: " . $code . "]";
 
                 // Non - Linkable course title only. The course link isn't linkable.
                 $link = "<strong>" . $coursename . "</strong>" . "<br>" .
-                "<em>[" . $certificatename . " | " . userdate($date, $dateformat) . " | " . $code . "]</em>";
+                "[" . $certificatename . " | " . userdate($date, $dateformat) . " | " . $code . "]";
 
                 // Direct certificate download link.
                 $filelink = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'
@@ -185,6 +188,7 @@ class block_download_certificates extends block_base {
                  $this->content->footer = html_writer::link(new moodle_url('/blocks/download_certificates/report.php',
                                  array('userid' => $USER->id)),
                                  get_string('download_certificates_footermessage', 'block_download_certificates'));
+
         }
 
         $this->content->text = html_writer::table($table);

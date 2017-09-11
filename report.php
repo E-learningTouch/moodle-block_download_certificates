@@ -21,16 +21,16 @@
  * --------------------------
  * Displays all issued certificates for users with unique codes.
  * The certificates will also be issued for courses that have been archived since issuing of the certificates.
+ * All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj).
  *
- * @copyright  2015 onwards Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com>
- * @author     Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com> | 2015
+ * @copyright  2015 onwards Manieer Chhettri | <manieer@gmail.com>
+ * @author     Manieer Chhettri | <manieer@gmail.com> | 2015
  * @package    block_download_certificates
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once('../../config.php');
 require_once($CFG->dirroot.'/mod/certificate/locallib.php');
-
 require_login();
 
 $url = new moodle_url('/blocks/download_certificates/report.php');
@@ -85,7 +85,8 @@ $PAGE->set_url($url);
         $certificates = $DB->get_records_sql($sql, array('userid' => $USER->id));
 
         if (!$certificates) {
-            print_error(get_string('notissuedyet', 'certificate'));
+             // No Certificate Issued - Print error message.
+            print_error(get_string('download_certificates_nocertsissued', 'block_download_certificates'));
         } else {
 
             foreach ($certificates as $certdata) {
@@ -117,12 +118,12 @@ $PAGE->set_url($url);
 
                 // Linkable Direct course. Use $courselink for clickable course link.
                 $courselink = html_writer::link(new moodle_url('/course/view.php', array('id' => $courseid)),
-                "<strong>" . $coursename . "</strong>", array('fullname' => $coursename))  . "<br><em>" .
-                "[Certificate Name: " . $certificatename . "]</em>";
+                "<strong>" . $coursename . "</strong>", array('fullname' => $coursename))  . "<br>" .
+                "[" . $certificatename . "]";
 
                 // Non - Linkable course title only. The course link isn't linkable.
                 $link = "<strong>" . $coursename . "</strong>" . "<br>" .
-                "<em>[" . $certificatename . "]</em>";
+                "[" . $certificatename . "]";
 
                  // Direct certificate download link.
                 $filelink = file_encode_url($CFG->wwwroot.'/pluginfile.php', '/'
@@ -138,8 +139,8 @@ $PAGE->set_url($url);
             echo '<br />';
             echo html_writer::table($table);
 
-            //the below two lines were added for the download all certificates functionality
-            $allDownloadsLink = $CFG->wwwroot."/blocks/download_certificates/download_all_my_certificates.php";
-            echo "<a href='".$allDownloadsLink."'><button>Download all my certificates</button></a>";
+            // Download all previously certificates as Zipped file.
+            $alldownloadslink = $CFG->wwwroot."/blocks/download_certificates/download_all_my_certificates.php";
+            echo "<a href='".$alldownloadslink."'><button>Download all my certificates</button></a>";
         }
         echo $OUTPUT->footer();

@@ -12,19 +12,22 @@
  * You should have received a copy of the GNU General Public License
  * along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
  *
+ * Version details
+ *
  * Download certificates block
  * --------------------------
  * Displays all issued certificates for users with unique codes.
  * The certificates will also be issued for courses that have been archived since issuing of the certificates.
+ * All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj).
  *
- * @author  Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com> | 2015
- * @package    blocks
- * @subpackage block_download_certificates
+ * @copyright  2015 onwards Manieer Chhettri | <manieer@gmail.com>
+ * @author     Manieer Chhettri | <manieer@gmail.com> | 2015
+ * @package    block_download_certificates
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 
 .block_download_certificates h1 {margin: 4px;font-size: 1.1em;}
-.block_download_certificatesg table.grades {text-align: left;width: 100%; cell-spacing: 1px;}
+.block_download_certificatesg table.grades {text-align: left;width: 100%; border-spacing: 1px;}
 .block_download_certificates th {text-align: left}
 .block_download_certificates table {width: 100%; border: 1px; border-spacing: 1px;}
 .block_download_certificates table td {padding: 3px;}

@@ -14,28 +14,29 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
- /**
-  * Version details
-  *
-  * Download certificates block
-  * --------------------------
-  * Displays all issued certificates for users with unique codes.
-  * The certificates will also be issued for courses that have been archived since issuing of the certificates.
-  *
-  * @copyright  2015 onwards Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com>
-  * @author     Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com> | 2015
-  * @package    block_download_certificates
-  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-  */
+/**
+ * Version details
+ *
+ * Download certificates block
+ * --------------------------
+ * Displays all issued certificates for users with unique codes.
+ * The certificates will also be issued for courses that have been archived since issuing of the certificates.
+ * All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj).
+ *
+ * @copyright  2015 onwards Manieer Chhettri | <manieer@gmail.com>
+ * @author     Manieer Chhettri | <manieer@gmail.com> | 2015
+ * @package    block_download_certificates
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2016090100;       // The current module version (Date: YYYYMMDDXX).
+$plugin->version  = 2017091100;       // The current module version (Date: YYYYMMDDXX).
 $plugin->requires = 2010112400;       // Requires this Moodle version 2.
 $plugin->cron = 0;                    // Period for cron to check this module (secs).
 $plugin->component = 'block_download_certificates'; // To check on upgrade, that module sits in correct place.
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v8-0901';
+$plugin->release = 'Ver10:11Sept2017';
 
 $plugin->dependencies = array(
     'mod_certificate' => ANY_VERSION
