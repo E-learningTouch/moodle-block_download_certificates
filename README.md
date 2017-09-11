@@ -20,17 +20,17 @@ Moodle download certificate block
  * Download certificates block
  * --------------------------
  * Displays all issued certificates for users with unique codes. 
- * The certificates will also be issued for courses that have been archived since issuing of the certificates 
+ * The certificates will also be issued for courses that have been archived since issuing of the certificates.
+ * All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj). 
  *
- * @author  Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com> | 2015
+ * @author  Manieer Chhettri | <manieer@gmail.com> | 2015
  * @package    blocks
  * @subpackage block_download_certificates
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 /*
-* FUTURE DEVELOPMENT *
-* Will aim to add an option for downloading all the issued certificates as a zip file.
-* Option to filter certificates by issue date for e.g. from and to filters. */
+* NEW FEATURE *
+* All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj). */
 *
 * INSTALL:
 * Download the folder and install it to /blocks/ folder within moodle installation.
