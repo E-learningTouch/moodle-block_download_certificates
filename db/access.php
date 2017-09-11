@@ -21,9 +21,10 @@
  * --------------------------
  * Displays all issued certificates for users with unique codes.
  * The certificates will also be issued for courses that have been archived since issuing of the certificates.
+ * All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj).
  *
- * @copyright  2015 onwards Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com>
- * @author     Manieer Chhettri | Marie Curie, UK | <manieer@gmail.com> | 2015
+ * @copyright  2015 onwards Manieer Chhettri | <manieer@gmail.com>
+ * @author     Manieer Chhettri | <manieer@gmail.com> | 2015
  * @package    block_download_certificates
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
