@@ -31,12 +31,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2017091100;       // The current module version (Date: YYYYMMDDXX).
+$plugin->version  = 2017091900;       // The current module version (Date: YYYYMMDDXX).
 $plugin->requires = 2010112400;       // Requires this Moodle version 2.
 $plugin->cron = 0;                    // Period for cron to check this module (secs).
 $plugin->component = 'block_download_certificates'; // To check on upgrade, that module sits in correct place.
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'Ver10:11Sept2017';
+$plugin->release = 'Ver10:19Sept2017';
 
 $plugin->dependencies = array(
     'mod_certificate' => ANY_VERSION
