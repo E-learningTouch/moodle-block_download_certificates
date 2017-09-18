@@ -41,6 +41,7 @@ $string['download_certificates_footermessage'] = 'All My Certificates';
 $string['download_certificates_nocertsissued'] = 'You do not have any certificates issued to you.';
 $string['download_certificates_nofilefound'] = 'No files found.';
 $string['download_certificates_heading'] = 'All Previously Issued Certificates';
+$string['download_certificates_downloadallcerts'] = 'Download all my certificates';
 $string['download_certificates_modulenameplural'] = 'Certificates';
 $string['download_certificates:addinstance'] = 'Add a new report certificates block';
 $string['download_certificates:myaddinstance'] = 'Add a new report certificates block to the My Moodle page';
