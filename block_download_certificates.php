@@ -133,7 +133,7 @@ class block_download_certificates extends block_base {
 
         if (empty($certificates)) {
             // No Certificate Issued - Print error message.
-            $this->content->text = get_string('download_certificates_noreports', 'block_download_certificates');
+            $this->content->text = get_string('download_certificates_nocertsissued', 'block_download_certificates');
             return $this->content;
         } else {
             foreach ($certificates as $certdata) {
