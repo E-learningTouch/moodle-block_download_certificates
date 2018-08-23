@@ -141,6 +141,7 @@ $PAGE->set_url($url);
 
             // Download all previously certificates as Zipped file.
             $alldownloadslink = $CFG->wwwroot."/blocks/download_certificates/download_all_my_certificates.php";
-            echo "<a href='".$alldownloadslink."'><button>".get_string('download_certificates_downloadallcerts', 'block_download_certificates')."</button></a>";
+            echo "<a href='".$alldownloadslink."'><button>"
+            .get_string('download_certificates_downloadallcerts', 'block_download_certificates')."</button></a>";
         }
         echo $OUTPUT->footer();
