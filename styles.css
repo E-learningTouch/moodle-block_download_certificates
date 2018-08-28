@@ -26,11 +26,40 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 
-.block_download_certificates h1 {margin: 4px;font-size: 1.1em;}
-.block_download_certificatesg table.grades {text-align: left;width: 100%; border-spacing: 1px;}
-.block_download_certificates th {text-align: left}
-.block_download_certificates table {width: 100%; border: 1px; border-spacing: 1px;}
-.block_download_certificates table td {padding: 3px;}
+.block_download_certificates h1 {
+    margin: 4px;
+    font-size: 1.1em;
+}
+
+.block_download_certificatesg table.grades {
+    text-align: left;
+    width: 100%;
+    border-spacing: 1px;
+}
+
+.block_download_certificates th {
+    text-align: left;
+}
+
+.block_download_certificates table {
+    width: 100%;
+    border: 1px;
+    border-spacing: 1px;
+}
+
+.block_download_certificates table td {
+    padding: 3px;
+}
+
 .block_download_certificates table.grades .number,
-.block_download_certificates table.grades .grade {text-align: right;width: 10%;}
-.block_download_certificates table.grades caption {margin: 1em 0px 0px 0px;border-bottom-width: 1px;border-bottom-style: solid;font-weight: bold;}
+.block_download_certificates table.grades .grade {
+    text-align: right;
+    width: 10%;
+}
+
+.block_download_certificates table.grades .caption {
+    margin: 1px 0 0 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    font-weight: bold;
+}

@@ -53,7 +53,7 @@ class block_download_certificates extends block_base {
      */
     public function init() {
         $this->title   = get_string('download_certificates', 'block_download_certificates');
-        $this->version = 2016081200;
+        $this->version = 2018082800;
     }
 
     /**
