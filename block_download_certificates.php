@@ -30,7 +30,6 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-require_login();
 
 require_once($CFG->dirroot.'/mod/certificate/locallib.php');
 
