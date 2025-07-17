@@ -1,0 +1,15 @@
+{
+    "name": "elearningtouch/block_download_certificates",
+    "description": "Moodle block Download Certificates.",
+    "type": "moodle-block",
+    "license": "GPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "block_download_certificates\\": "classes/"
+        }
+    },
+    "require": {},
+    "extra": {
+        "installer-name": "block_download_certificates"
+    }
+}
