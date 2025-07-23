@@ -15,7 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for block_download_certificates plugin.
+ * Version information.
+ *
+ * Multiple Enrollments - Allows admin to enrol one or more users into multiple courses at the same time.
+ *                        There is a single screen which allows admin to manage course enrolments.
  *
  * @package   block_download_certificates
  * @copyright 2015 Manieer Chhettri  (Original Idea for Moodle 2.x and 3.x)
@@ -24,10 +27,20 @@
  * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace block_download_certificates\privacy;
 
-$plugin->component = 'block_download_certificates';
-$plugin->version = 2025062502;
-$plugin->requires = 2022112800; // Moodle 4.1 minimum.
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+/**
+ * Privacy Subsystem implementing null_provider.
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return string
+     */
+    public static function get_reason(): string {
+        return 'privacy:metadata';
+    }
+}

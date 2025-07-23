@@ -1,0 +1,335 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_download_certificates/main_page
+
+    Main page template for certificate download management.
+
+    Context variables required for this template:
+    * certificates - Array of certificate objects
+    * total_count - Total number of certificates
+    * download_all_url - URL for downloading all certificates
+    * has_certificates - Boolean indicating if there are certificates
+
+    Example context (json):
+    {
+        "certificates": [
+            {
+                "id": 1,
+                "username": "John Doe",
+                "email": "john@example.com",
+                "coursename": "Sample Course",
+                "templatename": "Certificate Template",
+                "code": "ABC123",
+                "timecreated": "2025-01-01 10:00:00",
+                "download_url": "http://moodle.block/pluginfile.php/..."
+            }
+        ],
+        "total_count": 1,
+        "download_all_url": "http://moodle.blocks/blocks/download_certificat/index.php?action=download_all&sesskey=...",
+        "has_certificates": true
+    }
+}}
+
+<div class="block-download-certificat-main">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">
+                        {{#str}}certificate_management, block_download_certificates{{/str}}
+                    </h3>
+                    {{#has_certificates}}
+                    <div class="card-actions">
+                        <a href="{{{download_all_url}}}" class="btn btn-success"
+                           onclick="return confirm('{{#str}}confirm_download_all, block_download_certificates{{/str}}')">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                            {{#str}}download_all_certificates, block_download_certificates{{/str}}
+                        </a>
+                    </div>
+                    {{/has_certificates}}
+                </div>                <div class="card-body">
+                    <!-- Date Range Download Section -->
+                    <div class="mb-4">
+                        <div class="card border-primary">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0 white-color">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    {{#str}}download_by_date_range, block_download_certificates{{/str}}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">{{#str}}date_range_help, block_download_certificates{{/str}}</p>
+                                <form method="post" action="download_range.php" class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="start_date" class="form-label">{{#str}}start_date, block_download_certificates{{/str}}</label>
+                                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="end_date" class="form-label">{{#str}}end_date, block_download_certificates{{/str}}</label>
+                                        <input type="date" class="form-control" id="end_date" name="end_date" required>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <input type="hidden" name="action" value="download_range">
+                                        <input type="hidden" name="sesskey" value="{{sesskey}}">
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                            {{#str}}download_range, block_download_certificates{{/str}}
+                                        </button>
+                                    </div>
+                                </form>                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Download Section -->
+                    <div class="mb-4">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0 white-color">
+                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                    {{#str}}download_by_course, block_download_certificates{{/str}}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">{{#str}}course_download_help, block_download_certificates{{/str}}</p>
+                                {{#has_courses}}
+                                <form method="post" action="download_course.php" class="row g-3">
+                                    <div class="col-md-8">
+                                        <label for="course_select" class="form-label">{{#str}}select_course, block_download_certificates{{/str}}</label>
+                                        <select class="form-select" id="course_select" name="courseid" required>
+                                            <option value="">{{#str}}choose_course, block_download_certificates{{/str}}</option>
+                                            {{#courses}}
+                                            <option value="{{id}}">{{fullname}} ({{certificate_count}} {{#str}}certificates, block_download_certificates{{/str}})</option>
+                                            {{/courses}}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <input type="hidden" name="action" value="download_course">
+                                        <input type="hidden" name="sesskey" value="{{sesskey}}">
+                                        <button type="submit" class="btn btn-success w-100">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                            {{#str}}download_course_certificates, block_download_certificates{{/str}}
+                                        </button>
+                                    </div>
+                                </form>
+                                {{/has_courses}}
+                                {{^has_courses}}
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                    {{#str}}no_courses_with_certificates, block_download_certificates{{/str}}
+                                </div>
+                                {{/has_courses}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cohort Download Section -->
+                    <div class="mb-4">
+                        <div class="card border-info">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0 white-color">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                    {{#str}}download_by_cohort, block_download_certificates{{/str}}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">{{#str}}cohort_download_help, block_download_certificates{{/str}}</p>
+                                {{#has_cohorts}}
+                                <form method="post" action="download_cohort.php" class="row g-3">
+                                    <div class="col-md-8">
+                                        <label for="cohort_select" class="form-label">{{#str}}select_cohort, block_download_certificates{{/str}}</label>
+                                        <select class="form-select" id="cohort_select" name="cohortid" required>
+                                            <option value="">{{#str}}choose_cohort, block_download_certificates{{/str}}</option>
+                                            {{#cohorts}}
+                                            <option value="{{id}}">{{name}} ({{member_count}} {{#str}}members, block_download_certificates{{/str}}, {{certificate_count}} {{#str}}certificates, block_download_certificates{{/str}})</option>
+                                            {{/cohorts}}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <input type="hidden" name="action" value="download_cohort">
+                                        <input type="hidden" name="sesskey" value="{{sesskey}}">
+                                        <button type="submit" class="btn btn-info w-100">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                            {{#str}}download_cohort_certificates, block_download_certificates{{/str}}
+                                        </button>
+                                    </div>
+                                </form>
+                                {{/has_cohorts}}
+                                {{^has_cohorts}}
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                    {{#str}}no_cohorts_with_certificates, block_download_certificates{{/str}}
+                                </div>
+                                {{/has_cohorts}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Download Section -->
+                    <div class="mb-4">
+                        <div class="card border-warning">
+                            <div class="card-header bg-warning text-white">
+                                <h5 class="mb-0 white-color">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    {{#str}}download_by_user, block_download_certificates{{/str}}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">{{#str}}user_download_help, block_download_certificates{{/str}}</p>
+                                {{#has_users}}
+                                <form method="post" action="download_user.php" class="row g-3">
+                                    <div class="col-md-8">
+                                        <label for="user_select" class="form-label">{{#str}}select_user, block_download_certificates{{/str}}</label>
+                                        <select class="form-select" id="user_select" name="userid" required>
+                                            <option value="">{{#str}}choose_user, block_download_certificates{{/str}}</option>
+                                            {{#users}}
+                                            <option value="{{id}}">{{fullname}} - {{email}} ({{certificate_count}} {{#str}}certificates, block_download_certificates{{/str}})</option>
+                                            {{/users}}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <input type="hidden" name="action" value="download_user">
+                                        <input type="hidden" name="sesskey" value="{{sesskey}}">
+                                        <button type="submit" class="btn btn-warning w-100">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                            {{#str}}download_user_certificates, block_download_certificates{{/str}}
+                                        </button>
+                                    </div>
+                                </form>
+                                {{/has_users}}
+                                {{^has_users}}
+                                <div class="alert alert-warning">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                    {{#str}}no_users_with_certificates, block_download_certificates{{/str}}
+                                </div>
+                                {{/has_users}}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{#has_certificates}}
+                        <div class="alert alert-info">
+                            {{#str}}total_certificates, block_download_certificates{{/str}}: <strong>{{total_count}}</strong>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">{{#str}}user, core{{/str}}</th>
+                                        <th scope="col">{{#str}}email, core{{/str}}</th>
+                                        <th scope="col">{{#str}}course, core{{/str}}</th>
+                                        <th scope="col">{{#str}}template, block_download_certificates{{/str}}</th>
+                                        <th scope="col">{{#str}}code, block_download_certificates{{/str}}</th>
+                                        <th scope="col">{{#str}}date_created, block_download_certificates{{/str}}</th>
+                                        <th scope="col">{{#str}}actions, core{{/str}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#certificates}}
+                                    <tr>
+                                        <td>
+                                            <strong>{{username}}</strong>
+                                        </td>
+                                        <td>
+                                            <small class="text-muted">{{email}}</small>
+                                        </td>
+                                        <td>
+                                            {{coursename}}
+                                        </td>
+                                        <td>
+                                            {{templatename}}
+                                        </td>
+                                        <td>
+                                            <code>{{code}}</code>
+                                        </td>
+                                        <td>
+                                            <small>{{timecreated}}</small>
+                                        </td>                                        <td>
+                                            <a href="{{{download_single_url}}}" class="btn btn-sm btn-primary"
+                                               title="{{#str}}download_certificate, block_download_certificates{{/str}}">
+                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                                {{#str}}download, core{{/str}}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {{/certificates}}
+                                </tbody>
+                            </table>
+                        </div>
+                    {{/has_certificates}}
+
+                    {{^has_certificates}}
+                        <div class="alert alert-warning text-center">
+                            <i class="fa fa-exclamation-triangle fa-2x mb-3" aria-hidden="true"></i>
+                            <h5>{{#str}}no_certificates_found, block_download_certificates{{/str}}</h5>
+                            <p class="mb-0">{{#str}}no_certificates_description, block_download_certificates{{/str}}</p>
+                        </div>
+                    {{/has_certificates}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form[action="download_range.php"]');
+    const startDateInput = document.getElementById('start_date');
+    const endDateInput = document.getElementById('end_date');
+
+    if (form && startDateInput && endDateInput) {
+        form.addEventListener('submit', function(e) {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (startDate > endDate) {
+                e.preventDefault();
+                alert('{{#str}}invalidaterange, block_download_certificates{{/str}}');
+                return false;
+            }
+
+            // Show loading indicator
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> {{#str}}downloadinprogress, block_download_certificates{{/str}}';
+            submitBtn.disabled = true;
+
+            // Re-enable button after 30 seconds in case of error
+            setTimeout(function() {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 30000);
+        });
+
+        // Set max date to today
+        const today = new Date().toISOString().split('T')[0];
+        startDateInput.setAttribute('max', today);
+        endDateInput.setAttribute('max', today);
+
+        // Update end date min when start date changes
+        startDateInput.addEventListener('change', function() {
+            endDateInput.setAttribute('min', this.value);
+        });
+
+        // Update start date max when end date changes
+        endDateInput.addEventListener('change', function() {
+            startDateInput.setAttribute('max', this.value);
+        });
+    }
+});
+</script>

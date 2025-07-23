@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for block_download_certificates plugin.
+ * Course completion event observers for block_download_certificates plugin.
  *
  * @package   block_download_certificates
  * @copyright 2015 Manieer Chhettri  (Original Idea for Moodle 2.x and 3.x)
@@ -24,10 +24,28 @@
  * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+/**
+ * Event observer for course completion.
+ */
+class block_download_certificates_observer {
 
-$plugin->component = 'block_download_certificates';
-$plugin->version = 2025062502;
-$plugin->requires = 2022112800; // Moodle 4.1 minimum.
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.0.0';
+    /**
+     * Observer for course completion event.
+     *
+     * @param \core\event\course_completed $event
+     */
+    public static function course_completed(\core\event\course_completed $event) {
+        global $DB;
+
+        // Check if plugin is enabled.
+        if (!get_config('block_download_certificates', 'enable')) {
+            return;
+        }
+
+        $data = new stdClass();
+        $data->userid = $event->userid;
+        $data->courseid = $event->courseid;
+        $data->timecompleted = $event->timecreated;
+
+    }
+}

@@ -1,37 +1,27 @@
-# download_certificates
-Moodle download certificate block
+# Block Download Certificates
 
-/**
- * This file is part of Moodle - http://moodle.org/
- *
- * Moodle is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * Moodle is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Download certificates block
- * --------------------------
- * Displays all issued certificates for users with unique codes. 
- * The certificates will also be issued for courses that have been archived since issuing of the certificates.
- * All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj). 
- *
- * @author  Manieer Chhettri | <manieer@gmail.com> | 2015
- * @package    blocks
- * @subpackage block_download_certificates
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
-/*
-* NEW FEATURE *
-* All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj). */
-*
-* INSTALL:
-* Download the folder and install it to /blocks/ folder within moodle installation.
-*/
+Ce plugin Moodle permet de télécharger des certificats individuellement ou en lot.
+
+1. Placez le dossier dans `/blocks/download_certificates/` de votre installation Moodle
+2. Visitez l'administration de Moodle pour installer le plugin
+
+## Fonctionnalités
+
+- Téléchargement de tous les certificats
+- Téléchargement par plage de dates
+- Téléchargement par cours
+- Téléchargement par cohorte
+- Téléchargement par utilisateur
+- Support de tool_certificate et customcert
+- Nomenclature standardisée : [nomapprenant]_[nomcertificat]_[codeducertificat].pdf
+
+## Permissions
+
+- `block/download_certificates:view` - Voir le bloc
+- `block/download_certificates:manage` - Gérer les téléchargements
+- `block/download_certificates:addinstance` - Ajouter une instance
+- `block/download_certificates:myaddinstance` - Ajouter au tableau de bord
+
+## Version
+
+Version 1.0.0 - Compatible Moodle 4.1+

@@ -15,43 +15,53 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Database access definitions for block_download_certificates plugin.
  *
- * Download certificates block
- * --------------------------
- * Displays all issued certificates for users with unique codes.
- * The certificates will also be issued for courses that have been archived since issuing of the certificates.
- * All previously issued certificates can be downloaded as Zipped file. Contributed by Neeraj KP (kpneeraj).
- *
- * @copyright  2015 onwards Manieer Chhettri | <manieer@gmail.com>
- * @author     Manieer Chhettri | <manieer@gmail.com> | 2015
- * @package    block_download_certificates
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   block_download_certificates
+ * @copyright 2015 Manieer Chhettri  (Original Idea for Moodle 2.x and 3.x)
+ * @copyright 2025 E-learning Touch' contact@elearningtouch.com (Maintainer)
+ * @author    Thomas Clément 222384061+ClementThomasELT@users.noreply.github.com (Coder)
+ * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-
-    'block/download_certificates:addinstance' => array(
+$capabilities = [
+    'block/download_certificates:view' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => [
+            'guest' => CAP_PREVENT,
+            'user' => CAP_ALLOW,
+            'student' => CAP_ALLOW,
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+        ],
+    ],
+    'block/download_certificates:manage' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
+    'block/download_certificates:addinstance' => [
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
+        'archetypes' => [
             'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
-        ),
-
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
-    ),
-
-    'block/download_certificates:myaddinstance' => array(
+            'manager' => CAP_ALLOW,
+        ],
+        'clonepermissionsfrom' => 'moodle/site:manageblocks',
+    ],
+    'block/download_certificates:myaddinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-            'user' => CAP_ALLOW
-        ),
-
-        'clonepermissionsfrom' => 'moodle/my:manageblocks'
-    ),
-);
+        'archetypes' => [
+            'user' => CAP_ALLOW,
+        ],
+        'clonepermissionsfrom' => 'moodle/my:manageblocks',
+    ],
+];
