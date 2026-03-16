@@ -56,6 +56,46 @@ $data['users'] = $users;
 $data['has_users'] = !empty($users);
 $PAGE->requires->css('/blocks/download_certificates/styles.css');
 
+// Initialize certificate table JS module (dynamic AJAX table).
+$tableconfig = [
+    'sesskey' => sesskey(),
+    'total_count' => $data['total_count'],
+];
+$PAGE->requires->js_call_amd('block_download_certificates/certificate_table', 'init', [$tableconfig]);
+
+// Initialize async download JS module.
+$jsconfig = [
+    'sesskey' => sesskey(),
+    'pending_tasks' => $data['pending_tasks'] ?? [],
+];
+$PAGE->requires->js_call_amd('block_download_certificates/async_download', 'init', [$jsconfig]);
+
+// Strings for JS modules.
+$PAGE->requires->strings_for_js([
+    // Async download strings.
+    'async_generating',
+    'async_preparing',
+    'async_processing',
+    'async_ready',
+    'async_zip_ready',
+    'async_close',
+    'async_download',
+    'async_can_close',
+    'async_zip_ready_label_all',
+    'async_zip_ready_label_course',
+    'async_zip_ready_label_user',
+    'async_zip_ready_label_cohort',
+    'async_zip_ready_label_range',
+    // Table strings.
+    'certificates',
+    'template',
+    'date_created',
+    'no_certificates_found',
+    'no_search_results',
+    'type',
+    'download_certificate',
+], 'block_download_certificates');
+
 echo $OUTPUT->header();
 
 // Render the main page using mustache template.

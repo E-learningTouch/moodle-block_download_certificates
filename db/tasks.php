@@ -15,10 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details for block_download_certificates plugin.
+ * Scheduled tasks definition for block_download_certificates.
  *
  * @package   block_download_certificates
- * @copyright 2015 Manieer Chhettri  (Original Idea for Moodle 2.x and 3.x)
  * @copyright 2025 E-learning Touch' contact@elearningtouch.com (Maintainer)
  * @author    Thomas Clément 222384061+ClementThomasELT@users.noreply.github.com (Coder)
  * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,8 +25,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_download_certificates';
-$plugin->version = 2026030901;
-$plugin->requires = 2022112800; // Moodle 4.1 minimum.
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.4.0';
+$tasks = [
+    [
+        'classname' => 'block_download_certificates\task\cleanup_expired',
+        'blocking' => 0,
+        'minute' => '0',
+        'hour' => '*',
+        'day' => '*',
+        'month' => '*',
+        'dayofweek' => '*',
+    ],
+];

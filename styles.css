@@ -1,52 +1,303 @@
-.path-blocks-download_certificates .white-color {
-    color : white!important;
+/**
+ * Styles for block_download_certificates plugin.
+ *
+ * @package   block_download_certificates
+ * @copyright 2025 E-learning Touch'
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/* ================================================================
+   Dashboard Header
+   ================================================================ */
+
+.block-download-certificat-main .cert-dashboard .card-body {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 8px;
 }
 
-.path-blocks-download_certificates .block-download-certificat-main .card {
+.block-download-certificat-main .cert-stat-icon {
+    opacity: 0.85;
+}
+
+.block-download-certificat-main .btn-download-all {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.3);
 }
 
-.path-blocks-download_certificates .block-download-certificat-main .card-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+.block-download-certificat-main .btn-download-all:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4);
+}
+
+/* ================================================================
+   Filter Tabs
+   ================================================================ */
+
+.block-download-certificat-main .cert-filters-card .card-header {
+    background: transparent;
     border-bottom: none;
 }
 
-.path-blocks-download_certificates .block-download-certificat-main .table th {
+.block-download-certificat-main .cert-filters-card .card-header-tabs {
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    border-bottom: 0;
+}
+
+.block-download-certificat-main .cert-filters-card .nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.block-download-certificat-main .cert-filters-card .nav-tabs .nav-link {
+    color: #6c757d;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 12px 20px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-bottom: -2px;
+}
+
+.block-download-certificat-main .cert-filters-card .nav-tabs .nav-link:hover {
+    color: #0d6efd;
+    border-bottom-color: rgba(13, 110, 253, 0.3);
+    background-color: rgba(13, 110, 253, 0.04);
+}
+
+.block-download-certificat-main .cert-filters-card .nav-tabs .nav-link.active {
+    color: #0d6efd;
+    border-bottom-color: #0d6efd;
+    background-color: transparent;
+    font-weight: 600;
+}
+
+.block-download-certificat-main .cert-filters-card .nav-tabs .nav-link i {
+    opacity: 0.7;
+}
+
+.block-download-certificat-main .cert-filters-card .nav-tabs .nav-link.active i {
+    opacity: 1;
+}
+
+.block-download-certificat-main .tab-pane {
+    animation: fadeInTab 0.3s ease;
+}
+
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================================================================
+   Table Card
+   ================================================================ */
+
+.block-download-certificat-main .cert-table-card .card-header {
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border-bottom: 1px solid #dee2e6;
+}
+
+.block-download-certificat-main .cert-table-card .card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Search input */
+.block-download-certificat-main #cert-search-input {
+    border-radius: 0;
+    border-left: none;
+    transition: box-shadow 0.2s ease;
+}
+
+.block-download-certificat-main #cert-search-input:focus {
+    box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.15);
+}
+
+.block-download-certificat-main .input-group-prepend .input-group-text {
+    background-color: #fff;
+    border-right: none;
+}
+
+/* ================================================================
+   Dynamic Table
+   ================================================================ */
+
+.block-download-certificat-main .cert-table {
+    margin: 0;
+}
+
+.block-download-certificat-main .cert-table thead th {
+    position: sticky;
+    top: 0;
+    background: #f1f3f5;
     border-top: none;
     font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #495057;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.block-download-certificat-main .cert-table .sortable-header {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s ease;
+}
+
+.block-download-certificat-main .cert-table .sortable-header:hover {
+    color: #0d6efd;
+}
+
+.block-download-certificat-main .cert-table tbody td {
+    vertical-align: middle;
+    padding: 10px 12px;
     font-size: 0.9rem;
 }
 
-.path-blocks-download_certificates .block-download-certificat-main .btn-success {
-    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-    border: none;
+/* Row animation */
+.block-download-certificat-main .cert-row {
+    animation: fadeInRow 0.3s ease both;
 }
 
-.path-blocks-download_certificates .block-download-certificat-main .btn-success:hover {
-    background: linear-gradient(135deg, #0f8778 0%, #2dd4bf 100%);
-    transform: translateY(-1px);
+@keyframes fadeInRow {
+    from {
+        opacity: 0;
+        transform: translateX(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-.path-blocks-download_certificates .block-download-certificat-main .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
+/* ================================================================
+   Certificate Type Badges
+   ================================================================ */
+
+.block-download-certificat-main .cert-table .badge {
+    font-size: 0.72rem;
+    padding: 4px 8px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
 }
 
-.path-blocks-download_certificates .block-download-certificat-main .btn-primary:hover {
-    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-    transform: translateY(-1px);
+/* ================================================================
+   Pagination
+   ================================================================ */
+
+.block-download-certificat-main .pagination {
+    margin: 0;
 }
 
-.path-blocks-download_certificates .block-download-certificat-main .alert-info {
-    background: linear-gradient(135deg, #e0f2fe 0%, #f3f4f6 100%);
-    border: 1px solid #81d4fa;
-    color: #0277bd;
+.block-download-certificat-main .pagination .page-link {
+    border-radius: 4px;
+    margin: 0 2px;
+    color: #495057;
+    border-color: #dee2e6;
+    transition: all 0.15s ease;
+    min-width: 36px;
+    text-align: center;
 }
 
-.path-blocks-download_certificates .block-download-certificat-main .alert-warning {
-    background: linear-gradient(135deg, #fff8e1 0%, #fafafa 100%);
-    border: 1px solid #ffcc02;
-    color: #f57f17;
+.block-download-certificat-main .pagination .page-link:hover {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.block-download-certificat-main .pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.block-download-certificat-main .pagination .page-item.disabled .page-link {
+    opacity: 0.5;
+}
+
+/* ================================================================
+   Responsive
+   ================================================================ */
+
+@media (max-width: 768px) {
+    .block-download-certificat-main .cert-filters-card .nav-tabs .nav-link {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .block-download-certificat-main .cert-filters-card .nav-tabs .nav-link i {
+        display: none;
+    }
+
+    .block-download-certificat-main .cert-table-card .card-header .d-flex {
+        flex-direction: column;
+    }
+
+    .block-download-certificat-main .input-group {
+        min-width: 100% !important;
+    }
+}
+
+/* ================================================================
+   Async Progress Banner (persistent, top of page)
+   ================================================================ */
+
+.async-progress-banner {
+    background: linear-gradient(135deg, #e8f0fe 0%, #f0f4ff 100%);
+    border: 1px solid #c2d5f7;
+    border-radius: 8px;
+    padding: 12px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.1);
+    animation: bannerSlideIn 0.3s ease-out;
+}
+
+.async-progress-banner .progress {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.async-progress-banner .progress-bar {
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.async-progress-banner-success {
+    background: linear-gradient(135deg, #e8f8e8 0%, #f0fff0 100%);
+    border-color: #a3d9a5;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1);
+}
+
+.async-progress-banner-error {
+    background: linear-gradient(135deg, #fde8e8 0%, #fff0f0 100%);
+    border-color: #f5c6cb;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.1);
+}
+
+@keyframes bannerSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -160,8 +160,43 @@ $string['novalidcertificatescohort'] = 'No valid certificates could be downloade
 $string['customcert_certificate'] = 'Custom Certificate';
 $string['customcert_not_available'] = 'Custom Certificate plugin not available.';
 
-// Error messages.
 $string['cannotdownloadcertificate'] = 'Cannot download certificate. Please try again later or contact an administrator.';
 
-// RGPD Data
-$string['privacy:metadata'] = 'The Download Certificates plugin does not store any personal data';
+// Async download strings.
+$string['task_generate_zip'] = 'Generate certificate ZIP archive';
+$string['task_cleanup_expired'] = 'Clean up expired certificate download tasks';
+$string['async_generating'] = 'Generating ZIP archive';
+$string['async_preparing'] = 'Preparing your download...';
+$string['async_processing'] = 'Processing certificates...';
+$string['async_ready'] = 'Your ZIP is ready! Download will start automatically.';
+$string['async_zip_ready'] = 'A certificate ZIP archive is ready for download.';
+$string['async_download_started'] = 'Your download is being prepared in the background. You can continue browsing.';
+$string['tasknotfound'] = 'Download task not found.';
+$string['tasknotready'] = 'Download task is not ready yet.';
+$string['accessdenied'] = 'Access denied.';
+$string['invalidtype'] = 'Invalid download type.';
+$string['nocertificatesinrange'] = 'No certificates found in the specified date range.';
+$string['async_close'] = 'Close';
+$string['async_download'] = 'Download';
+$string['async_can_close'] = 'You can close this window and continue browsing. The archive will keep generating and will be ready when you return to this page.';
+$string['async_zip_ready_label_all'] = 'Your ZIP archive of all certificates is ready for download.';
+$string['async_zip_ready_label_course'] = 'Your ZIP archive of course certificates is ready for download.';
+$string['async_zip_ready_label_user'] = 'Your ZIP archive of user certificates is ready for download.';
+$string['async_zip_ready_label_cohort'] = 'Your ZIP archive of cohort certificates is ready for download.';
+$string['async_zip_ready_label_range'] = 'Your ZIP archive of certificates (date range) is ready for download.';
+
+// Table and search strings.
+$string['type'] = 'Type';
+$string['no_search_results'] = 'No certificates found matching your search.';
+$string['search_placeholder'] = 'Search by name, email, course, template...';
+$string['per_page'] = 'Per page';
+$string['showing_results'] = 'Showing {$a->start}-{$a->end} of {$a->total}';
+
+// Tab labels (short).
+$string['tab_date_range'] = 'By date range';
+$string['tab_course'] = 'By course';
+$string['tab_cohort'] = 'By cohort';
+$string['tab_user'] = 'By user';
+
+// RGPD Data.
+$string['privacy:metadata'] = 'The Download Certificates plugin does not store any personal data.';
