@@ -143,18 +143,17 @@ define(['jquery'], function ($) {
      * @param {string} sesskey Session key
      */
     function interceptDownloadAll(sesskey) {
-        var downloadAllBtn = document.querySelector('[data-download-all]');
-        if (!downloadAllBtn) {
+        var downloadAllBtns = document.querySelectorAll('[data-download-all]');
+        if (!downloadAllBtns.length) {
             return;
         }
 
-        var certCount = parseInt(downloadAllBtn.getAttribute('data-cert-count'), 10);
-        if (certCount >= ASYNC_THRESHOLD) {
-            downloadAllBtn.addEventListener('click', function (e) {
+        downloadAllBtns.forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 createAsyncTask('all', {}, sesskey);
             });
-        }
+        });
     }
 
     /**
@@ -301,10 +300,10 @@ define(['jquery'], function ($) {
             '</div>' +
             '</div>';
 
-        var mainBlock = document.querySelector('.block-download-certificat-main');
-        if (mainBlock) {
-            mainBlock.insertAdjacentHTML('afterbegin', bannerHtml);
-        }
+        var mainBlock = document.querySelector('.block-download-certificat-main')
+            || document.getElementById('page-content')
+            || document.body;
+        mainBlock.insertAdjacentHTML('afterbegin', bannerHtml);
     }
 
     /**
@@ -611,10 +610,10 @@ define(['jquery'], function ($) {
             '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
             '<span aria-hidden="true">&times;</span></button></div>';
 
-        var mainBlock = document.querySelector('.block-download-certificat-main');
-        if (mainBlock) {
-            mainBlock.insertAdjacentHTML('afterbegin', bannerHtml);
-        }
+        var mainBlock = document.querySelector('.block-download-certificat-main')
+            || document.getElementById('page-content')
+            || document.body;
+        mainBlock.insertAdjacentHTML('afterbegin', bannerHtml);
     }
 
     return {

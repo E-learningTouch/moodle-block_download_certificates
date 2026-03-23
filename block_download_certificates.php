@@ -183,7 +183,7 @@ class block_download_certificates extends block_base {
                 ['class' => 'btn btn-primary btn-sm d-block mb-2']
             );
 
-            // Quick download all link.
+            // Quick download all button (async).
             if ($stats['total'] > 0) {
                 $downloadurl = new moodle_url('/blocks/download_certificates/download.php',
                                             ['action' => 'download_all', 'sesskey' => sesskey()]);
@@ -192,9 +192,36 @@ class block_download_certificates extends block_base {
                     get_string('download_all_quick', 'block_download_certificates'),
                     [
                         'class' => 'btn btn-success btn-sm d-block',
-                        'onclick' => "return confirm('" . get_string('confirm_download_all', 'block_download_certificates') . "')",
+                        'data-download-all' => '1',
+                        'data-cert-count' => $stats['total'],
                     ]
                 );
+
+                // Load async download JS module for the block.
+                global $PAGE;
+                $jsconfig = [
+                    'sesskey' => sesskey(),
+                    'pending_tasks' => $controller->get_pending_tasks(),
+                ];
+                $PAGE->requires->js_call_amd('block_download_certificates/async_download', 'init', [$jsconfig]);
+
+                // Required JS strings for the async download module.
+                $PAGE->requires->strings_for_js([
+                    'async_generating',
+                    'async_preparing',
+                    'async_processing',
+                    'async_ready',
+                    'async_zip_ready',
+                    'async_close',
+                    'async_download',
+                    'async_can_close',
+                    'async_zip_ready_label_all',
+                    'async_zip_ready_label_course',
+                    'async_zip_ready_label_user',
+                    'async_zip_ready_label_cohort',
+                    'async_zip_ready_label_range',
+                    'certificates',
+                ], 'block_download_certificates');
             }
 
             $content .= html_writer::end_div(); // Actions.

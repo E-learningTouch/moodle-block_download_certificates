@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1] - 2026-03-17
+
+### Changed
+- Bouton « Télécharger tous les certificats » dans le block (sidebar) : migration de l'ancien système synchrone (`download.php`) vers le système de téléchargement asynchrone (tâche adhoc + modal de progression + banner persistante)
+- Le seuil de 30 certificats pour le mode asynchrone est supprimé pour le bouton « Download All » — le téléchargement passe systématiquement en mode async
+- Le module AMD `async_download` est chargé dans le block en plus de la page de gestion, avec les chaînes de langue nécessaires
+- La banner de progression asynchrone fonctionne maintenant hors de la page de gestion (fallback sur `#page-content` ou `body`)
+
 ## [1.4.0] - 2026-03-09
 
 ### Changed

@@ -27,7 +27,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_download_certificates';
-$plugin->version = 2026030901;
+$plugin->version = 2026031700;
 $plugin->requires = 2022112800; // Moodle 4.1 minimum.
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.4.0';
+$plugin->release = '1.4.1';
