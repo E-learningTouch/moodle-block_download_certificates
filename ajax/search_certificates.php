@@ -32,6 +32,7 @@ require_login();
 require_sesskey();
 
 $context = context_system::instance();
+$PAGE->set_context($context);
 require_capability('block/download_certificates:manage', $context);
 
 // Parameters.
@@ -80,8 +81,8 @@ try {
             'cert_type' => $record->cert_type,
             'username' => fullname($record),
             'email' => $record->email,
-            'coursename' => $record->coursename ?: get_string('unknown', 'block_download_certificates'),
-            'templatename' => $record->templatename ?: get_string('unknown', 'block_download_certificates'),
+            'coursename' => format_string($record->coursename ?: get_string('unknown', 'block_download_certificates')),
+            'templatename' => format_string($record->templatename ?: get_string('unknown', 'block_download_certificates')),
             'code' => $record->code,
             'timecreated' => userdate($record->timecreated),
             'timecreated_raw' => $record->timecreated,

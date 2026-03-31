@@ -282,7 +282,7 @@ class block_download_certificates_query {
                 if (!isset($allcourses[$course->id])) {
                     $allcourses[$course->id] = [
                         'id' => $course->id,
-                        'fullname' => $course->fullname,
+                        'fullname' => format_string($course->fullname, true, ['context' => context_system::instance()]),
                         'shortname' => $course->shortname,
                         'tool_certificate_count' => 0,
                         'customcert_count' => 0,
@@ -389,7 +389,7 @@ class block_download_certificates_query {
                 if ($totalcertcount > 0) {
                     $cohortsdata[] = [
                         'id' => $cohort->id,
-                        'name' => $cohort->name,
+                        'name' => format_string($cohort->name, true, ['context' => context_system::instance()]),
                         'description' => $cohort->description,
                         'member_count' => $membercount,
                         'certificate_count' => $totalcertcount,
@@ -694,7 +694,8 @@ class block_download_certificates_query {
 
         // tool_certificate.
         if ($dbman->table_exists('tool_certificate_issues')) {
-            $unions[] = "SELECT tci.id, tci.id AS original_id, 'tool_certificate' AS cert_type,
+            $uniqueid = $DB->sql_concat("'tc_'", 'tci.id');
+            $unions[] = "SELECT {$uniqueid} AS id, tci.id AS original_id, 'tool_certificate' AS cert_type,
                                 tci.userid,
                                 u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
                                 u.middlename, u.alternatename, u.email,
@@ -710,7 +711,8 @@ class block_download_certificates_query {
 
         // customcert.
         if ($dbman->table_exists('customcert_issues')) {
-            $unions[] = "SELECT ci.id, ci.customcertid AS original_id, 'customcert' AS cert_type,
+            $uniqueid = $DB->sql_concat("'cc_'", 'ci.id');
+            $unions[] = "SELECT {$uniqueid} AS id, ci.customcertid AS original_id, 'customcert' AS cert_type,
                                 ci.userid,
                                 u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
                                 u.middlename, u.alternatename, u.email,
@@ -726,7 +728,8 @@ class block_download_certificates_query {
 
         // mod_certificate.
         if ($dbman->table_exists('certificate_issues')) {
-            $unions[] = "SELECT ci.id, ci.certificateid AS original_id, 'mod_certificate' AS cert_type,
+            $uniqueid = $DB->sql_concat("'mc_'", 'ci.id');
+            $unions[] = "SELECT {$uniqueid} AS id, ci.certificateid AS original_id, 'mod_certificate' AS cert_type,
                                 ci.userid,
                                 u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
                                 u.middlename, u.alternatename, u.email,
@@ -742,7 +745,8 @@ class block_download_certificates_query {
 
         // simplecertificate.
         if ($dbman->table_exists('simplecertificate_issues')) {
-            $unions[] = "SELECT si.id, si.certificateid AS original_id, 'mod_simplecertificate' AS cert_type,
+            $uniqueid = $DB->sql_concat("'sc_'", 'si.id');
+            $unions[] = "SELECT {$uniqueid} AS id, si.certificateid AS original_id, 'mod_simplecertificate' AS cert_type,
                                 si.userid,
                                 u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
                                 u.middlename, u.alternatename, u.email,
@@ -757,7 +761,8 @@ class block_download_certificates_query {
 
         // certificatebeautiful.
         if ($dbman->table_exists('certificatebeautiful_issue')) {
-            $unions[] = "SELECT cbi.id, cbi.certificatebeautifulid AS original_id, 'mod_certificatebeautiful' AS cert_type,
+            $uniqueid = $DB->sql_concat("'cb_'", 'cbi.id');
+            $unions[] = "SELECT {$uniqueid} AS id, cbi.certificatebeautifulid AS original_id, 'mod_certificatebeautiful' AS cert_type,
                                 cbi.userid,
                                 u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
                                 u.middlename, u.alternatename, u.email,

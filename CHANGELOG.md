@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2] - 2026-03-31
+
+### Fixed
+- Téléchargement par lot (par cours, par cohorte, par utilisateur, par plage de dates) : quand le nombre de certificats était inférieur au seuil asynchrone (30), les formulaires se soumettaient vers `download.php` qui ne reconnaissait pas les actions spécifiques et redirigait vers la page d'accueil sans télécharger — chaque formulaire pointe maintenant vers son endpoint dédié (`download_course.php`, `download_cohort.php`, `download_user.php`, `download_range.php`)
+- Tableau des certificats : les en-têtes de colonnes affichaient `[[USER,CORE]]`, `[[EMAIL,CORE]]`, etc. car les chaînes core Moodle (`user`, `email`, `course`, `actions`) n'étaient pas chargées via `strings_for_js`
+- Noms de cours et de cohortes : les filtres multilang `{mlang}` n'étaient pas traités — ajout de `format_string()` dans `search_certificates.php` et `certificate_query.php` pour résoudre correctement les noms selon la langue de l'utilisateur
+
 ## [1.4.1] - 2026-03-17
 
 ### Changed

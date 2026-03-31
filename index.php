@@ -96,6 +96,14 @@ $PAGE->requires->strings_for_js([
     'download_certificate',
 ], 'block_download_certificates');
 
+// Core strings used by certificate_table.js.
+$PAGE->requires->strings_for_js([
+    'user',
+    'email',
+    'course',
+    'actions',
+], 'core');
+
 echo $OUTPUT->header();
 
 // Render the main page using mustache template.
