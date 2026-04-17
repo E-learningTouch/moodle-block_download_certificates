@@ -133,6 +133,14 @@
     border-right: none;
 }
 
+/* En BS5, input-group-prepend/append n'existent pas et cassent le flex.
+   display:contents les rend transparents au layout, les enfants deviennent
+   des flex items directs du input-group. Compatible BS4 et BS5. */
+.block-download-certificat-main .input-group-prepend,
+.block-download-certificat-main .input-group-append {
+    display: contents;
+}
+
 /* ================================================================
    Dynamic Table
    ================================================================ */
