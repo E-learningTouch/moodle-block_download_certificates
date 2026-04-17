@@ -115,30 +115,90 @@
     border-top: 1px solid #dee2e6;
 }
 
-/* Search input — compatible Bootstrap 4 (input-group-prepend) et 5 (enfant direct) */
-.block-download-certificat-main #cert-search-input {
-    border-radius: 0;
-    border-left: none;
-    transition: box-shadow 0.2s ease;
+/* ================================================================
+   Barre de recherche custom — indépendant de Bootstrap
+   ================================================================ */
+
+.block-download-certificat-main .cert-search-group {
+    display: flex;
+    align-items: stretch;
+    min-width: 250px;
+    margin-right: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.block-download-certificat-main #cert-search-input:focus {
+.block-download-certificat-main .cert-search-group:focus-within {
+    border-color: #86b7fe;
     box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.15);
 }
 
-/* Icône de recherche — BS4 via .input-group-prepend, BS5 en enfant direct */
-.block-download-certificat-main .input-group-prepend .input-group-text,
-.block-download-certificat-main .input-group > .input-group-text {
+.block-download-certificat-main .cert-search-icon {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
     background-color: #fff;
-    border-right: none;
+    color: #6c757d;
+    font-size: 0.85rem;
 }
 
-/* En BS5, input-group-prepend/append n'existent pas et cassent le flex.
-   display:contents les rend transparents au layout, les enfants deviennent
-   des flex items directs du input-group. Compatible BS4 et BS5. */
-.block-download-certificat-main .input-group-prepend,
-.block-download-certificat-main .input-group-append {
-    display: contents;
+.block-download-certificat-main .cert-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.875rem;
+    background: #fff;
+    min-width: 0;
+}
+
+.block-download-certificat-main .cert-search-input::placeholder {
+    color: #adb5bd;
+}
+
+.block-download-certificat-main .cert-search-clear {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
+    background: #fff;
+    border: none;
+    border-left: 1px solid #ced4da;
+    color: #6c757d;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.block-download-certificat-main .cert-search-clear:hover {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+/* Sélecteur per-page custom */
+.block-download-certificat-main .cert-perpage-select {
+    width: auto;
+    padding: 0.3rem 1.75rem 0.3rem 0.5rem;
+    font-size: 0.875rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.4rem center;
+    background-size: 12px 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+}
+
+.block-download-certificat-main .cert-perpage-select:focus {
+    border-color: #86b7fe;
+    outline: none;
+    box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.15);
 }
 
 /* ================================================================
@@ -258,7 +318,7 @@
         flex-direction: column;
     }
 
-    .block-download-certificat-main .input-group {
+    .block-download-certificat-main .cert-search-group {
         min-width: 100% !important;
     }
 }

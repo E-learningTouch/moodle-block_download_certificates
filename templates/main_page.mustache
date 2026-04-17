@@ -259,32 +259,23 @@
 
                 {{! Search + Per-page controls }}
                 <div class="d-flex align-items-center mt-2 mt-md-0">
-                    {{! Search }}
-                    <div class="input-group input-group-sm mr-3 me-3" style="min-width: 250px;">
-                        {{! Wrapper prepend pour BS4, ignoré par BS5 }}
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
-
+                    {{! Search — classes custom pour éviter les incompatibilités BS4/BS5 }}
+                    <div class="cert-search-group">
+                        <span class="cert-search-icon">
+                            <i class="fa fa-search"></i>
+                        </span>
                         <input type="search" id="cert-search-input"
-                               class="form-control"
+                               class="cert-search-input"
                                placeholder="{{#str}}search, core{{/str}}..."
                                aria-label="Search">
-
-                        {{! Wrapper append pour BS4, ignoré par BS5 }}
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                    id="cert-search-clear" title="Clear">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
+                        <button class="cert-search-clear" type="button"
+                                id="cert-search-clear" title="Clear">
+                            <i class="fa fa-times"></i>
+                        </button>
                     </div>
 
                     {{! Per-page selector }}
-                    <select id="cert-perpage" class="custom-select custom-select-sm form-select form-select-sm"
-                            style="width: auto;">
+                    <select id="cert-perpage" class="cert-perpage-select">
                         <option value="25">25</option>
                         <option value="50" selected>50</option>
                         <option value="100">100</option>
