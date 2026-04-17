@@ -437,7 +437,7 @@ define(['jquery'], function ($) {
             '<div class="modal-header bg-primary text-white">' +
             '<h5 class="modal-title"><i class="fa fa-download"></i> ' +
             M.util.get_string('async_generating', 'block_download_certificates') + '</h5>' +
-            '<button type="button" class="close btn-close btn-close-white text-white" id="async-close-btn" aria-label="Close">' +
+            '<button type="button" class="cert-close-btn" id="async-close-btn" aria-label="Close">' +
             '<span aria-hidden="true">&times;</span></button>' +
             '</div>' +
             '<div class="modal-body text-center">' +
@@ -607,7 +607,7 @@ define(['jquery'], function ($) {
             ' <a href="' + downloadUrl + '" class="btn btn-sm btn-success ml-2">' +
             '<i class="fa fa-download"></i> ' +
             M.util.get_string('async_download', 'block_download_certificates') + '</a>' +
-            '<button type="button" class="close btn-close" data-dismiss="alert" data-bs-dismiss="alert" aria-label="Close">' +
+            '<button type="button" class="cert-close-btn cert-close-btn-dark" data-dismiss="alert" data-bs-dismiss="alert" aria-label="Close">' +
             '<span aria-hidden="true">&times;</span></button></div>';
 
         var mainBlock = document.querySelector('.block-download-certificat-main')
