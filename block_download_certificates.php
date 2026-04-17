@@ -529,4 +529,16 @@ class block_download_certificates extends block_base {
             return '';
         }
     }
+    
+    /**
+     * Copy any block-specific data when copying to a new block instance.
+     * Since this block does not use instance-specific custom tables, 
+     * we simply return true to allow the dashboard duplication to proceed.
+     *
+     * @param int $fromid original block instance id
+     * @return boolean
+     */
+    public function instance_copy($fromid) {
+        return true;
+    }
 }

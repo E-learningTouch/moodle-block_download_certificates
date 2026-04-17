@@ -59,35 +59,43 @@
     <div class="card mb-4 cert-filters-card">
         <div class="card-header p-0">
             <ul class="nav nav-tabs card-header-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="tab-daterange" data-toggle="tab"
-                       href="#pane-daterange" role="tab" aria-selected="true">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tab-daterange" 
+                       data-toggle="tab" data-bs-toggle="tab"
+                       href="#pane-daterange" data-bs-target="#pane-daterange" 
+                       role="tab" aria-controls="pane-daterange" aria-selected="true">
                         <i class="fa fa-calendar mr-1"></i>
                         {{#str}}tab_date_range, block_download_certificates{{/str}}
                     </a>
                 </li>
                 {{#has_courses}}
-                <li class="nav-item">
-                    <a class="nav-link" id="tab-course" data-toggle="tab"
-                       href="#pane-course" role="tab" aria-selected="false">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="tab-course" 
+                       data-toggle="tab" data-bs-toggle="tab"
+                       href="#pane-course" data-bs-target="#pane-course" 
+                       role="tab" aria-controls="pane-course" aria-selected="false">
                         <i class="fa fa-graduation-cap mr-1"></i>
                         {{#str}}tab_course, block_download_certificates{{/str}}
                     </a>
                 </li>
                 {{/has_courses}}
                 {{#has_cohorts}}
-                <li class="nav-item">
-                    <a class="nav-link" id="tab-cohort" data-toggle="tab"
-                       href="#pane-cohort" role="tab" aria-selected="false">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="tab-cohort" 
+                       data-toggle="tab" data-bs-toggle="tab"
+                       href="#pane-cohort" data-bs-target="#pane-cohort" 
+                       role="tab" aria-controls="pane-cohort" aria-selected="false">
                         <i class="fa fa-users mr-1"></i>
                         {{#str}}tab_cohort, block_download_certificates{{/str}}
                     </a>
                 </li>
                 {{/has_cohorts}}
                 {{#has_users}}
-                <li class="nav-item">
-                    <a class="nav-link" id="tab-user" data-toggle="tab"
-                       href="#pane-user" role="tab" aria-selected="false">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="tab-user" 
+                       data-toggle="tab" data-bs-toggle="tab"
+                       href="#pane-user" data-bs-target="#pane-user" 
+                       role="tab" aria-controls="pane-user" aria-selected="false">
                         <i class="fa fa-user mr-1"></i>
                         {{#str}}tab_user, block_download_certificates{{/str}}
                     </a>
@@ -252,22 +260,20 @@
                 {{! Search + Per-page controls }}
                 <div class="d-flex align-items-center mt-2 mt-md-0">
                     {{! Search }}
-                    <div class="input-group input-group-sm mr-3" style="min-width: 250px;">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
+                    <div class="input-group input-group-sm mr-3 me-3" style="min-width: 250px;">
+                        <span class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </span>
+                        
                         <input type="search" id="cert-search-input"
                                class="form-control"
                                placeholder="{{#str}}search, core{{/str}}..."
                                aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                    id="cert-search-clear" title="Clear">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
+                               
+                        <button class="btn btn-outline-secondary" type="button"
+                                id="cert-search-clear" title="Clear">
+                            <i class="fa fa-times"></i>
+                        </button>
                     </div>
 
                     {{! Per-page selector }}
