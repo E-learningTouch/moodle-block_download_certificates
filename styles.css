@@ -115,7 +115,7 @@
     border-top: 1px solid #dee2e6;
 }
 
-/* Search input */
+/* Search input — compatible Bootstrap 4 (input-group-prepend) et 5 (enfant direct) */
 .block-download-certificat-main #cert-search-input {
     border-radius: 0;
     border-left: none;
@@ -126,7 +126,9 @@
     box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.15);
 }
 
-.block-download-certificat-main .input-group-prepend .input-group-text {
+/* Icône de recherche — BS4 via .input-group-prepend, BS5 en enfant direct */
+.block-download-certificat-main .input-group-prepend .input-group-text,
+.block-download-certificat-main .input-group > .input-group-text {
     background-color: #fff;
     border-right: none;
 }
@@ -300,4 +302,35 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ================================================================
+   Boutons de fermeture — compatibilité Bootstrap 4 et 5
+   En BS5, btn-close utilise un SVG en background, on le désactive
+   pour garder le × textuel qui fonctionne dans les deux versions.
+   ================================================================ */
+
+/* Modale de progression async */
+#async-close-btn {
+    background-image: none !important;
+    font-size: 1.5rem;
+    line-height: 1;
+    opacity: 0.8;
+    padding: 0.5rem;
+    border: none;
+    color: #fff;
+}
+
+#async-close-btn:hover {
+    opacity: 1;
+    color: #fff;
+}
+
+/* Bannière alert-dismissible (ZIP prêt) */
+.block-download-certificat-main .alert-dismissible .close.btn-close,
+.block-download-certificat-main .alert-dismissible .btn-close {
+    background-image: none !important;
+    font-size: 1.25rem;
+    line-height: 1;
+    padding: 0.75rem 1rem;
 }

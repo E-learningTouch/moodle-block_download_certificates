@@ -252,7 +252,7 @@
                         <i class="fa fa-list mr-1"></i>
                         {{#str}}certificates, block_download_certificates{{/str}}
                     </h5>
-                    <span id="cert-result-count" class="badge badge-light">
+                    <span id="cert-result-count" class="badge badge-light bg-light text-dark">
                         {{total_count}} {{#str}}certificates, block_download_certificates{{/str}}
                     </span>
                 </div>
@@ -261,23 +261,29 @@
                 <div class="d-flex align-items-center mt-2 mt-md-0">
                     {{! Search }}
                     <div class="input-group input-group-sm mr-3 me-3" style="min-width: 250px;">
-                        <span class="input-group-text">
-                            <i class="fa fa-search"></i>
-                        </span>
-                        
+                        {{! Wrapper prepend pour BS4, ignoré par BS5 }}
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+
                         <input type="search" id="cert-search-input"
                                class="form-control"
                                placeholder="{{#str}}search, core{{/str}}..."
                                aria-label="Search">
-                               
-                        <button class="btn btn-outline-secondary" type="button"
-                                id="cert-search-clear" title="Clear">
-                            <i class="fa fa-times"></i>
-                        </button>
+
+                        {{! Wrapper append pour BS4, ignoré par BS5 }}
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                    id="cert-search-clear" title="Clear">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
                     </div>
 
                     {{! Per-page selector }}
-                    <select id="cert-perpage" class="custom-select custom-select-sm"
+                    <select id="cert-perpage" class="custom-select custom-select-sm form-select form-select-sm"
                             style="width: auto;">
                         <option value="25">25</option>
                         <option value="50" selected>50</option>
